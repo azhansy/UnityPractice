@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
     //触发检测到碰撞
     private void OnTriggerEnter2D(Collider2D collosion)
 	{
-        Debug.Log("子弹碰撞了：" + collosion.tag);
+      
         switch (collosion.tag)
 		{
 
@@ -60,9 +60,23 @@ public class Bullet : MonoBehaviour
 				break;
                 //刚墙
 			case "Barrier":
+                collosion.SendMessage("PlayAudio");
                 Destroy(gameObject);
 				break;
-			default:
+            case "PlayerBullet":
+               
+                if (!isPlayerBullet)
+                {
+                    Destroy(gameObject);
+                }
+                break;
+            case "EnemyBullet":
+                if (isPlayerBullet)
+                {
+                    Destroy(gameObject);
+                }
+                break;
+            default:
 				break;
 		}
 	}

@@ -37,7 +37,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         //攻击时间间隔
-        if (timeVal >= 3)
+        if (timeVal >= 1)
         {
             Attack();
         }

@@ -13,18 +13,23 @@ public class MapCreation : MonoBehaviour
 
     private void Awake()
     {
+        InitMap();
+    }
+
+    private void InitMap()
+    {
         //实例化老家
         CreateItem(item[0], new Vector3(0, -8, 0), Quaternion.identity);
         //用墙把老家围起来
         CreateItem(item[1], new Vector3(-1, -8, 0), Quaternion.identity);
         CreateItem(item[1], new Vector3(1, -8, 0), Quaternion.identity);
-        for(int i = -1; i < 2; i++)
+        for (int i = -1; i < 2; i++)
         {
             CreateItem(item[1], new Vector3(i, -7, 0), Quaternion.identity);
         }
 
         //实例化外围墙
-        for(int i=-11; i<12; i++)
+        for (int i = -11; i < 12; i++)
         {
             CreateItem(item[6], new Vector3(i, 9, 0), Quaternion.identity);
         }
@@ -53,13 +58,13 @@ public class MapCreation : MonoBehaviour
         CreateItem(item[3], new Vector3(0, 8, 0), Quaternion.identity);
         CreateItem(item[3], new Vector3(10, 8, 0), Quaternion.identity);
 
-        InvokeRepeating("CreatetEnemy",4,5);
+        InvokeRepeating("CreatetEnemy", 4, 5);
 
         //实例化地图 1墙、2障碍、 4河流 5草
-        for (int i=0; i< 60; i++)
+        for (int i = 0; i < 60; i++)
         {
             CreateItem(item[1], createRandomPositon(), Quaternion.identity);
-          
+
         }
         for (int i = 0; i < 20; i++)
         {

@@ -148,7 +148,7 @@ MonoBehaviour:
   explositionPrefab: {fileID: 4051220850476717231, guid: 1bfcbb2a26c4a47c3a9ea0fb1aa0c377,
     type: 3}
   tankSprite:
+  - {fileID: 21300000, guid: 3348c3d1a93bce84fba2264f6a8458f4, type: 3}
   - {fileID: 21300012, guid: 3348c3d1a93bce84fba2264f6a8458f4, type: 3}
   - {fileID: 21300008, guid: 3348c3d1a93bce84fba2264f6a8458f4, type: 3}
   - {fileID: 21300004, guid: 3348c3d1a93bce84fba2264f6a8458f4, type: 3}
-  - {fileID: 21300000, guid: 3348c3d1a93bce84fba2264f6a8458f4, type: 3}

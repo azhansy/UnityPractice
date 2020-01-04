@@ -19,7 +19,12 @@ public class Player : MonoBehaviour
 	public GameObject explositionPrefab;
 	public GameObject defendEffectPrefab;
 
-	public Sprite[] tankSprite; //上 右  下 左
+    public AudioClip fireAudioClip;
+    public AudioSource moveAudio;
+    public AudioClip[] tankAudio;
+
+
+    public Sprite[] tankSprite; //上 右  下 左
 
 
     private void Awake()
@@ -59,7 +64,7 @@ public class Player : MonoBehaviour
 		Move();
 
         //攻击 cd
-        if (timeVal >= 0.4)
+        if (timeVal >= 0.2)
         {
             Attack();
         }
@@ -79,8 +84,17 @@ public class Player : MonoBehaviour
             //子弹产生的角度：当前坦克的角度+子弹应该旋转的角度
 			Instantiate(bulletPrefab, transform.position, Quaternion.Euler(transform.eulerAngles+bulletEulerAngles));
 			timeVal = 0;
-		}
+            PlayFireAudio();
+
+        }
 	}
+
+
+
+    private void PlayFireAudio()
+    {
+        AudioSource.PlayClipAtPoint(fireAudioClip, transform.position);
+    }
 
 
     //坦克的移动方法
@@ -94,12 +108,24 @@ public class Player : MonoBehaviour
 			sr.sprite = tankSprite[2];
 
 			bulletEulerAngles = new Vector3(0, 0, -180);
-		}
+
+        }
 		else if (v > 0)
 		{
 			sr.sprite = tankSprite[0];
 			bulletEulerAngles = new Vector3(0, 0, 0);
-		}
+        }
+
+
+        if (Mathf.Abs(v) > 0.05f)
+        {
+            moveAudio.clip = tankAudio[1];
+            if (!moveAudio.isPlaying)
+            {
+                moveAudio.Play();
+            }
+        }
+       
 
 		if (v != 0)
 		{
@@ -113,13 +139,32 @@ public class Player : MonoBehaviour
 		{
 			sr.sprite = tankSprite[3];
 			bulletEulerAngles = new Vector3(0, 0, 90);
-		}
+        }
 		else if (h > 0)
 		{
 			sr.sprite = tankSprite[1];
 			bulletEulerAngles = new Vector3(0, 0, -90);
-		}
-	}
+
+        }
+
+
+        if (Mathf.Abs(h) > 0.05f)
+        {
+            moveAudio.clip = tankAudio[1];
+            if (!moveAudio.isPlaying)
+            {
+                moveAudio.Play();
+            }
+        }
+        else
+        {
+            moveAudio.clip = tankAudio[0];
+            if (!moveAudio.isPlaying)
+            {
+                moveAudio.Play();
+            }
+        }
+    }
 
 
     //坦克死亡方法
