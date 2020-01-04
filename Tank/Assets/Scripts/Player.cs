@@ -48,23 +48,27 @@ public class Player : MonoBehaviour
 			}
 		}
 
-        //攻击 cd
-		if (timeVal >= 0.4)
-		{
-			Attack();
-		}
-		else
-		{
-			timeVal += Time.deltaTime;
-		}
-
-
 	}
 
    private void FixedUpdate()
 	{
+        if (PlayerManager.Instance.isDefeat)
+        {
+            return;
+        }
 		Move();
-	}
+
+        //攻击 cd
+        if (timeVal >= 0.4)
+        {
+            Attack();
+        }
+        else
+        {
+            timeVal += Time.deltaTime;
+        }
+
+    }
 
 
     //坦克的攻击方法
@@ -125,10 +129,12 @@ public class Player : MonoBehaviour
 		{
 			return;
 		}
-		//产生爆炸特效
-		Instantiate(explositionPrefab, transform.position, transform.rotation);
-		//死亡
+        PlayerManager.Instance.SetPlayerDead();
 
+        //产生爆炸特效
+        Instantiate(explositionPrefab, transform.position, transform.rotation);
+		//死亡
 		Destroy(gameObject);
-	}
+        
+    }
 }
